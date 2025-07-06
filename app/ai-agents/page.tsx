@@ -17,9 +17,15 @@ export default async function HomePage() {
 
   return (
     <main className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-10 border-b pb-3">
-        AI Agent Catalog
-      </h1>
+      <div className="mb-10">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          AI Agent Catalog
+        </h1>
+        <p className="text-gray-600 text-base max-w-2xl">
+          Explore a curated list of powerful AI agents designed to streamline
+          tasks, boost productivity, and deliver smarter user experiences.
+        </p>
+      </div>
       <ListOfAgents agents={agents} />
     </main>
   );
