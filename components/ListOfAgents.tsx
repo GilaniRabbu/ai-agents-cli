@@ -1,46 +1,38 @@
 /* eslint-disable */
 "use client";
 
-import { useSelector } from "react-redux";
-import { selectFilters } from "@/redux/filterSlice";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import { selectFilters } from "@/redux/filterSlice";
 import ClientAgentCard from "./ClientAgentCard";
 import SidebarFilters from "./SidebarFilters";
 
 export default function ListOfAgents({ agents }: { agents: any[] }) {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
-  // 🔐 Redirect if user is not authenticated
+  // 🔒 Redirect to "/" if session is not present
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/"); // Redirect to login
+    if (!session) {
+      router.replace("/"); // use replace to prevent back navigation
     }
-  }, [status, router]);
+  }, [session, router]);
 
-  // Optional: loading spinner
-  if (status === "loading") {
-    return <p className="text-center mt-10">Checking authentication...</p>;
-  }
+  // If session hasn't loaded yet, return null (or show a loading spinner)
+  if (!session) return null;
 
-  const {
-    search,
-    status: statusFilter,
-    category,
-    pricing,
-  } = useSelector(selectFilters);
+  const { search, status, category, pricing } = useSelector(selectFilters);
 
-  // 🧠 Filter the agents based on Redux filter state
   const filteredAgents = agents.filter((agent) => {
     const matchSearch =
       !search ||
       agent.name.toLowerCase().includes(search.toLowerCase()) ||
       agent.description.toLowerCase().includes(search.toLowerCase());
 
-    const matchStatus =
-      !statusFilter.length || statusFilter.includes(agent.status);
+    const matchStatus = !status.length || status.includes(agent.status);
     const matchCategory = !category.length || category.includes(agent.category);
     const matchPricing = !pricing || pricing === agent.pricingModel;
 
