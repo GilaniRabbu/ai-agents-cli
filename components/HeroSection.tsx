@@ -1,11 +1,11 @@
 "use client";
 
-// import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function HeroSection() {
-  //   const handleGoogleLogin = () => {
-  //     signIn("google");
-  //   };
+  const handleGoogleLogin = () => {
+    signIn("google");
+  };
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f172a] to-[#1e293b] px-6">
@@ -18,7 +18,7 @@ export default function HeroSection() {
           designed to boost your productivity and innovation.
         </p>
         <button
-          //   onClick={handleGoogleLogin}
+          onClick={handleGoogleLogin}
           className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 shadow-lg"
         >
           🔐 Sign in with Google

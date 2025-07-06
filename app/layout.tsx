@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import { Providers } from "@/redux/provider";
-// import { SessionProvider } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 
 const geist = Geist_Mono({
@@ -22,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geist.className} antialiased`}>
-        <Providers>{children}</Providers>
+        <SessionProvider>
+          <Providers>{children}</Providers>
+        </SessionProvider>
       </body>
     </html>
   );
