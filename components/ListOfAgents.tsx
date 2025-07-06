@@ -16,7 +16,7 @@ export default function ListOfAgents({ agents }: { agents: any[] }) {
   // 🔐 Redirect if user is not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/api/auth/signin"); // Redirect to login
+      router.push("/"); // Redirect to login
     }
   }, [status, router]);
 
