@@ -17,7 +17,7 @@ export default function SignInButton() {
         </p>
         <Button
           onClick={() => signOut()}
-          className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition"
+          className="rounded-md cursor-pointer bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition"
         >
           Sign out
         </Button>
@@ -35,7 +35,9 @@ export default function SignInButton() {
           Sign in with Google to access all our intelligent agent tools,
           designed to boost your productivity and innovation.
         </p>
-        <Button onClick={() => signIn("google")}>🔐 Sign in with Google</Button>
+        <Button className="cursor-pointer" onClick={() => signIn("google")}>
+          🔐 Sign in with Google
+        </Button>
       </div>
     </section>
   );
