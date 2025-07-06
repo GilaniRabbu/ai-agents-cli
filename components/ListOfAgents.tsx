@@ -1,31 +1,14 @@
 /* eslint-disable */
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import { selectFilters } from "@/redux/filterSlice";
 import ClientAgentCard from "./ClientAgentCard";
 import SidebarFilters from "./SidebarFilters";
 
 export default function ListOfAgents({ agents }: { agents: any[] }) {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  // 🔒 Redirect to "/" if session is not present
-  useEffect(() => {
-    if (!session) {
-      router.replace("/"); // use replace to prevent back navigation
-    }
-  }, [session, router]);
-
-  // If session hasn't loaded yet, return null (or show a loading spinner)
-  if (!session) return null;
-
   const { search, status, category, pricing } = useSelector(selectFilters);
-
+  // 🧠 Filter the agents based on Redux filter state
   const filteredAgents = agents.filter((agent) => {
     const matchSearch =
       !search ||
