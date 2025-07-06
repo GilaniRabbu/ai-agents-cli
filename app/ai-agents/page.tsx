@@ -17,7 +17,9 @@ export default async function HomePage() {
 
   return (
     <main className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">AI Agent Catalog (SSR)</h1>
+      <h1 className="text-3xl font-bold mb-10 border-b pb-3">
+        AI Agent Catalog
+      </h1>
       <ListOfAgents agents={agents} />
     </main>
   );
