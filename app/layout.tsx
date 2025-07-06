@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 
 const geist = Geist_Mono({
-  weight: ["500"],
+  weight: ["400", "700"],
   subsets: ["latin"],
 });
 

@@ -1,10 +1,10 @@
-import HeroSection from "@/components/HeroSection";
+import SignIn from "@/components/SignIn";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <HeroSection />
+      <SignIn />
     </div>
   );
 };
