@@ -3,11 +3,34 @@
 
 import { useSelector } from "react-redux";
 import { selectFilters } from "@/redux/filterSlice";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import ClientAgentCard from "./ClientAgentCard";
 import SidebarFilters from "./SidebarFilters";
 
 export default function ListOfAgents({ agents }: { agents: any[] }) {
-  const { search, status, category, pricing } = useSelector(selectFilters);
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  // 🔐 Redirect if user is not authenticated
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/api/auth/signin"); // Redirect to login
+    }
+  }, [status, router]);
+
+  // Optional: loading spinner
+  if (status === "loading") {
+    return <p className="text-center mt-10">Checking authentication...</p>;
+  }
+
+  const {
+    search,
+    status: statusFilter,
+    category,
+    pricing,
+  } = useSelector(selectFilters);
 
   // 🧠 Filter the agents based on Redux filter state
   const filteredAgents = agents.filter((agent) => {
@@ -16,7 +39,8 @@ export default function ListOfAgents({ agents }: { agents: any[] }) {
       agent.name.toLowerCase().includes(search.toLowerCase()) ||
       agent.description.toLowerCase().includes(search.toLowerCase());
 
-    const matchStatus = !status.length || status.includes(agent.status);
+    const matchStatus =
+      !statusFilter.length || statusFilter.includes(agent.status);
     const matchCategory = !category.length || category.includes(agent.category);
     const matchPricing = !pricing || pricing === agent.pricingModel;
 
