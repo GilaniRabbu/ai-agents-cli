@@ -16,12 +16,12 @@ export default async function HomePage() {
   const agents = await getAgents();
 
   return (
-    <main className="p-6 max-w-6xl mx-auto">
+    <main className="p-5 max-w-7xl mx-auto">
       <div className="mb-10">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">
           AI Agent Catalog
         </h1>
-        <p className="text-gray-600 text-base max-w-2xl">
+        <p className="text-base max-w-2xl text-gray-700">
           Explore a curated list of powerful AI agents designed to streamline
           tasks, boost productivity, and deliver smarter user experiences.
         </p>

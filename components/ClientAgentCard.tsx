@@ -20,7 +20,7 @@ export default function ClientAgentCard({ agent }: { agent: Agent }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Card className="hover:shadow-md transition-shadow h-full">
+      <Card className="h-full">
         <CardHeader>
           <CardTitle>{agent.name}</CardTitle>
         </CardHeader>
