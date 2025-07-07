@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 AI Agent Catalog (Next.js + TypeScript + Redux)
 
-## Getting Started
+A responsive, SEO-optimized AI Agent catalog built with Next.js App Router and TypeScript. This project showcases a mock directory of AI agents with filtering, search, and Google OAuth authentication.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- ✅ Server-Side Rendering (SSR) with Next.js App Router
+- ✅ Fully typed with TypeScript
+- ✅ Filterable and searchable AI Agent list
+- ✅ Global state management using Redux Toolkit
+- ✅ Shadcn UI for elegant, accessible components
+- ✅ Framer Motion for smooth UI animations
+- ✅ Google OAuth Authentication using NextAuth.js
+- ✅ Mobile-first responsive design
+- ✅ SEO-friendly metadata and dynamic head tags
+
+---
+
+## 🔐 Google OAuth Authentication
+
+Google Sign-In is implemented using **NextAuth.js** with full support for the App Router in Next.js.
+
+### 🔧 Steps Followed:
+
+1. **Created Google OAuth Credentials**
+
+   - Registered redirect URI:
+     ```
+     http://localhost:3000/api/auth/callback/google
+     ```
+
+2. **Configured environment variables**
+
+   - `GOOGLE_CLIENT_ID`
+   - `GOOGLE_CLIENT_SECRET`
+   - `NEXTAUTH_URL`
+   - `NEXTAUTH_SECRET`
+
+3. **Created the following file for API auth route:**
+
+   - `app/api/auth/[...nextauth]/route.ts`
+
+4. **Wrapped the entire app in SessionProvider**
+
+   - Location: `app/layout.tsx`
+
+5. **Created a reusable Sign In / Sign Out button**
+
+   - Location: `components/SignInButton.tsx`
+
+6. **Used `useSession()` to access the signed-in user**
+   - Used for conditional rendering and protecting pages
+
+> This setup allows users to authenticate securely using their Google accounts, and session information is accessible throughout the app.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **State Management**: Redux Toolkit
+- **Styling**: Tailwind CSS
+- **UI Library**: Shadcn UI
+- **Animation**: Framer Motion
+- **Authentication**: NextAuth.js
+
+---
+
+## 📁 Project Structure
+
+```bash
+📦 ai-agents/
+├── app/
+│   ├── api/
+│   │   └── auth/
+│   │       └── [...nextauth]/       # Google OAuth API route (NextAuth)
+│   │           └── route.ts
+│   ├── layout.tsx                   # Root layout with <SessionProvider>
+│   └── page.tsx                     # SSR-rendered AI Agent listing
+│
+├── components/
+│   ├── SidebarFilters.tsx           # Redux-only UI for search & filter options
+│   ├── SignInButton.tsx             # Google sign-in and sign-out control
+│   ├── ClientAgentCard.tsx          # Card UI to display agent details
+│   └── ListOfAgents.tsx             # Main section to display & filter agents
+│
+├── redux/
+│   ├── store.ts                     # Redux store configuration
+│   └── filterSlice.ts               # Stores user-selected filter/search state
+│
+├── public/
+│   └── favicon.ico                  # App favicon
+│
+├── styles/
+│   └── globals.css                  # Global styles (Tailwind)
+│
+├── .env.local                       # Environment variables (Google OAuth keys)
+├── package.json                     # Project dependencies and scripts
+└── README.md                        # Project documentation
+```
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd clone-repo
+npm install
+```
+
+Create a **.env.local** file with your Google OAuth credentials and run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
