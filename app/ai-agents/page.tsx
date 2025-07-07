@@ -2,6 +2,10 @@ import { Metadata } from "next";
 import mockAgents from "@/data/mock-agents.json";
 import ListOfAgents from "@/components/ListOfAgents";
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
+
 export const metadata: Metadata = {
   title: "ArkLab AI Agents Catalog",
   description: "Browse a server-rendered catalog of intelligent AI agents.",
@@ -14,6 +18,11 @@ async function getAgents() {
 
 export default async function HomePage() {
   const agents = await getAgents();
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/");
+  }
 
   return (
     <main className="p-5 max-w-7xl mx-auto">
