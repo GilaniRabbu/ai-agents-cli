@@ -3,6 +3,7 @@ import { Geist_Mono } from "next/font/google";
 import { Providers } from "@/redux/provider";
 import "./globals.css";
 import { ClientProviders } from "./client-provider";
+import Navbar from "@/components/Navbar";
 
 const geist = Geist_Mono({
   weight: ["400", "700"],
@@ -23,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geist.className} antialiased`}>
         <ClientProviders>
-          <Providers>{children}</Providers>
+          <Providers>
+            <Navbar />
+            {children}
+          </Providers>
         </ClientProviders>
       </body>
     </html>
